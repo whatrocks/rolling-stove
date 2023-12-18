@@ -7,7 +7,7 @@
       "module": "commonjs",
       "moduleResolution": "node",
       "baseUrl": "src/",
-      "typeRoots": ["./src/types", "./node_modules/@types"],
+      "typeRoots": ["./src/types", "./node_modules/@types", "../node_modules/@types"],
       "resolveJsonModule": true,
       "outDir": "./dist",
       "removeComments": true,
@@ -20,8 +20,5 @@
       "skipLibCheck": true
     },
     "include": ["./src/**/*.tsx", "./src/**/*.ts"],
-    "exclude": ["node_modules", "test/**/*.ts"],
-    "references": [
-      { "path": "../shared-types" }
-    ]
+    "exclude": ["node_modules", "test/**/*.ts"]
   }

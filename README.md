@@ -34,22 +34,20 @@ npm install react-leaflet -w rolling-stove-client
 * NPM
 
 #### Features
-* Package management with NPM
-* Testing
-* Cross-Origin Resource Sharing enabled using cors
-* Secured HTTP Headers using helmet
+* [x] Package management with NPM
+* [x] Testing with Jest and Supertest
+* [x] Cross-Origin Resource Sharing enabled using cors
+* [x] Secured HTTP Headers using helmet
 
 ## Future Features
-* Logging with winston
-* Environment variables
-* Compression
-* Git Hooks
-* Containerization
-
-
-* No database
-* No data model for trucks, locations, etc
-* Not dealing with timezones
+* [ ] Logging (winston)
+* [ ] Environment variables (dotenv)
+* [ ] Compression
+* [ ] Containerization
+* [ ] No database
+* [ ] No data model for trucks, locations, etc
+* [ ] Not dealing with timezones
 
 ### Both
-* Shared types between client and server
+* [ ] Shared types between client and server
+* [ ] Git Hooks
