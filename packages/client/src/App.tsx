@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+// import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+// import 'leaflet/dist/leaflet.css';
 import {
   Card,
   CardContent,
@@ -27,6 +29,8 @@ type LocationState = {
   latitude: number | null;
   longitude: number | null;
 };
+
+// const defaultCenter = [37.7636, -122.4174];
 
 function App() {
   const [location, setLocation] = useState<LocationState>({
@@ -84,7 +88,6 @@ function App() {
       const json = await response.json();
       const data: FoodTruck[] = json.data;
       setFoodTrucks(data);
-      console.log("data", data);
       setIsLoading(false);
     } catch (error) {
       // show error on screen!
@@ -93,39 +96,35 @@ function App() {
     }
   };
 
-  console.log("location", location);
-
+    console.log("location", location);
   return (
     <>
-      <div
-        className={
-          "h-screen flex flex-col space-y-4 items-center justify-center bg-slate-100"
-        }
-      >
+      <div className="h-screen flex flex-col space-y-4 items-center justify-center bg-slate-100">
+      
         <Button onClick={handleClick}>Find Food Trucks Open Now</Button>
-        {isLoading ? (
-          <div className="flex items-center space-x-4">
-            <Skeleton className="h-12 w-12 rounded-full" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
+          {isLoading ? (
+            <div className="flex items-center space-x-4">
+              <Skeleton className="h-12 w-12 rounded-full" />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+              </div>
             </div>
-          </div>
-        ) : (
-          foodTrucks.map((truck) => {
-            return (
-            <Card className="w-[350px] text-left text-sm" key={truck.id}>
-              <CardHeader>
-                <CardTitle>{truck.name}</CardTitle>
-                <CardDescription>{truck.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>Distance: {truck.distance.toPrecision(2)}</p>
-              </CardContent>
-            </Card>
-            );
-          })
-        )}
+          ) : (
+            foodTrucks.map((truck) => {
+              return (
+              <Card className="w-[350px] text-left text-sm" key={truck.id}>
+                <CardHeader>
+                  <CardTitle>{truck.name}</CardTitle>
+                  <CardDescription>{truck.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>Distance: {truck.distance.toPrecision(2)}</p>
+                </CardContent>
+              </Card>
+              );
+            })
+          )}
       </div>
     </>
   );
