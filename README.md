@@ -21,7 +21,7 @@ npm run dev
 Add new dep to a package
 
 ```bash
-npm install react-leaflet -w rolling-stove-client
+npm install <dep-name> -w rolling-stove-client
 ```
 
 ## Architecture
@@ -48,6 +48,8 @@ npm install react-leaflet -w rolling-stove-client
 * [ ] No data model for trucks, locations, etc
 * [ ] Not dealing with timezones
 
-### Both
+### Monorepo Setup
+
 * [ ] Shared types between client and server
-* [ ] Git Hooks
+* [ ] Git Hooks for linting
+* [ ] CI automation (testing, linting, etc)
