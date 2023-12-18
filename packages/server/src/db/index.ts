@@ -40,6 +40,12 @@ export function filterTrucks(trucks: FoodTruck[], params: TruckParams) {
       const truckEndTime = parseTime(truck.endTime)
       return currentTime >= truckStartTime && currentTime <= truckEndTime
     })
+    .reduce((acc: FoodTruck[], truck: FoodTruck) => {
+      if (!acc.find((t: FoodTruck) => t.name === truck.name)) {
+        acc.push(truck)
+      }
+      return acc
+    }, [])
     .map((truck) => {
       const truckLocation = { latitude: truck.lat, longitude: truck.lon }
       const userLocation = { latitude: params.lat, longitude: params.lon }
