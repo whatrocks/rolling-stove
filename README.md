@@ -23,3 +23,33 @@ Add new dep to a package
 ```bash
 npm install react-leaflet -w rolling-stove-client
 ```
+
+## Architecture
+
+### Server
+
+#### Tech Stack
+* Express.js
+* Typescript
+* NPM
+
+#### Features
+* Package management with NPM
+* Testing
+* Cross-Origin Resource Sharing enabled using cors
+* Secured HTTP Headers using helmet
+
+## Future Features
+* Logging with winston
+* Environment variables
+* Compression
+* Git Hooks
+* Containerization
+
+
+* No database
+* No data model for trucks, locations, etc
+* Not dealing with timezones
+
+### Both
+* Shared types between client and server
