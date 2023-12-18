@@ -1,5 +1,5 @@
 {
-  "name": "rolling-stove-api",
+  "name": "rolling-stove-server",
   "version": "0.0.1",
   "description": "API server for Rolling Stove app",
   "main": "index.js",

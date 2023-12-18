@@ -15,7 +15,7 @@ function mapJSONtoFoodTruck(json: any): FoodTruck {
     lon: parseFloat(json.longitude),
     description: json.optionaltext,
     name: json.applicant,
-    id: uuidv4()
+    id: uuidv4(),
   }
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */

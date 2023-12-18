@@ -19,8 +19,9 @@ interface FoodTruck {
   description: string;
   distance: number;
   name: string;
-  id: number;
+  id: string;
 }
+
 
 type LocationState = {
   latitude: number | null;
