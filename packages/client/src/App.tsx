@@ -24,16 +24,16 @@ interface FoodTruck {
 }
 
 type LocationState = {
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 };
 
 // const defaultCenter = [37.7636, -122.4174];
 
 function App() {
   const [location, setLocation] = useState<LocationState>({
-    latitude: null,
-    longitude: null,
+    latitude: 37.7749,
+    longitude: -122.4194,
   });
   const [foodTrucks, setFoodTrucks] = useState<FoodTruck[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -93,14 +93,18 @@ function App() {
       setIsLoading(false);
     }
   };
+  const truckPositions = foodTrucks.map((truck) => {
+    return { id: truck.id, lat: truck.lat, lon: truck.lon };
+  });
   return (
     <>
       <div className="relative h-screen flex flex-col space-y-4 items-center justify-center">
-        <Mapper />
+        <Mapper
+          currentPos={{ id: "user", lat: location.latitude, lon: location.longitude }}
+          trucks={truckPositions}
+        />
         <div style={{ zIndex: 10000 }}>
-          <Button  onClick={handleClick}>
-            Find Food Trucks Open Now
-          </Button>
+          <Button onClick={handleClick}>Find Food Trucks Open Now</Button>
           {isLoading ? (
             <div className="flex flex-col align-left space-y-4">
               <LoadingSkeleton />
@@ -110,7 +114,7 @@ function App() {
           ) : (
             foodTrucks.map((truck) => {
               return (
-                <Card className="w-[550px] text-left text-sm" key={truck.id}>
+                <Card className="w-[350px] text-left text-sm" key={truck.id}>
                   <CardHeader>
                     <div className="flex items-center space-x-4">
                       <Truck className="h-4 w-4" />
