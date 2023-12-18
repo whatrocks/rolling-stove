@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton";
-import "./App.css";
 
 interface FoodTruck {
   dayOfWeek: number;
@@ -11,6 +17,7 @@ interface FoodTruck {
   lat: number;
   lon: number;
   description: string;
+  distance: number;
   name: string;
   id: number;
 }
@@ -91,7 +98,7 @@ function App() {
     <>
       <div
         className={
-          "h-screen flex flex-col space-y-4 items-center justify-center"
+          "h-screen flex flex-col space-y-4 items-center justify-center bg-slate-100"
         }
       >
         <Button onClick={handleClick}>Find Food Trucks Open Now</Button>
@@ -105,7 +112,17 @@ function App() {
           </div>
         ) : (
           foodTrucks.map((truck) => {
-            return <Button key={truck.id}>{truck.name}</Button>;
+            return (
+            <Card className="w-[350px] text-left text-sm" key={truck.id}>
+              <CardHeader>
+                <CardTitle>{truck.name}</CardTitle>
+                <CardDescription>{truck.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>Distance: {truck.distance.toPrecision(2)}</p>
+              </CardContent>
+            </Card>
+            );
           })
         )}
       </div>
