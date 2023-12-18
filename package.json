@@ -9,7 +9,9 @@
   "description": "Monorepo for Rolling Stove application",
   "scripts": {
     "dev": "npx lerna run dev",
-    "test": "npx lerna run test"
+    "test": "npx lerna run test",
+    "lint": "npx lerna run lint",
+    "format": "npx lerna run format"
   },
   "repository": {
     "type": "git",
