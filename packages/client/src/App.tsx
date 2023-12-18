@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-// import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-// import 'leaflet/dist/leaflet.css';
+import { Truck } from "lucide-react";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton";
+} from "@/components/ui/card";
+import LoadingSkeleton from "./components/LoadingSkeleton";
+import Mapper from "./components/Mapper";
 
 interface FoodTruck {
   dayOfWeek: number;
@@ -23,7 +22,6 @@ interface FoodTruck {
   name: string;
   id: string;
 }
-
 
 type LocationState = {
   latitude: number | null;
@@ -63,7 +61,7 @@ function App() {
   }, []);
 
   const handleClick = async () => {
-    // handle location not there 
+    // handle location not there
     if (!location.latitude || !location.longitude) {
       // show error on screen!
       return;
@@ -95,39 +93,44 @@ function App() {
       setIsLoading(false);
     }
   };
-
-    console.log("location", location);
   return (
     <>
-      <div className="h-screen flex flex-col space-y-4 items-center justify-center bg-slate-100">
-      
-        <Button onClick={handleClick}>Find Food Trucks Open Now</Button>
+      <div className="relative h-screen flex flex-col space-y-4 items-center justify-center">
+        <Mapper />
+        <div style={{ zIndex: 10000 }}>
+          <Button  onClick={handleClick}>
+            Find Food Trucks Open Now
+          </Button>
           {isLoading ? (
-            <div className="flex items-center space-x-4">
-              <Skeleton className="h-12 w-12 rounded-full" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
-              </div>
+            <div className="flex flex-col align-left space-y-4">
+              <LoadingSkeleton />
+              <LoadingSkeleton />
+              <LoadingSkeleton />
             </div>
           ) : (
             foodTrucks.map((truck) => {
               return (
-              <Card className="w-[350px] text-left text-sm" key={truck.id}>
-                <CardHeader>
-                  <CardTitle>{truck.name}</CardTitle>
-                  <CardDescription>{truck.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>Distance: {truck.distance.toPrecision(2)}</p>
-                </CardContent>
-              </Card>
+                <Card className="w-[550px] text-left text-sm" key={truck.id}>
+                  <CardHeader>
+                    <div className="flex items-center space-x-4">
+                      <Truck className="h-4 w-4" />
+                      <CardTitle>{truck.name}</CardTitle>
+                    </div>
+                    <CardDescription>{truck.description}</CardDescription>
+                    <p>Distance: {truck.distance.toPrecision(2)}m</p>
+                  </CardHeader>
+                </Card>
               );
             })
           )}
+        </div>
       </div>
     </>
   );
 }
 
 export default App;
+
+/*
+
+*/
