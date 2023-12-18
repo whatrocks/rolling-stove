@@ -34,7 +34,6 @@ npm install <dep-name> -w rolling-stove-client
 * NPM
 
 #### Features
-* [x] Package management with NPM
 * [x] Testing with Jest and Supertest
 * [x] Cross-Origin Resource Sharing enabled using cors
 * [x] Secured HTTP Headers using helmet
@@ -48,7 +47,22 @@ npm install <dep-name> -w rolling-stove-client
 * [ ] No data model for trucks, locations, etc
 * [ ] Not dealing with timezones
 
-### Monorepo Setup
+
+### Client
+
+#### Tech Stack
+
+* React
+* Typescript
+* Vite
+* Leaflet
+
+#### Features
+* [ ] 
+* [ ]
+
+
+### Monorepo
 
 * [ ] Shared types between client and server
 * [ ] Git Hooks for linting

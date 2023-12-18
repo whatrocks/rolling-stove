@@ -1,5 +1,7 @@
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+
+import MapIcon from "./MapIcon";
 
 function ChangeView({ center, zoom }) {
   const map = useMap();
@@ -10,16 +12,22 @@ function ChangeView({ center, zoom }) {
 interface Position {
   lat: number;
   lon: number;
-  id: string;
+  id?: string;
+  name?: string;
+  description?: string;
 }
 
 interface MapperProps {
   currentPos: Position;
   trucks: Position[];
+  selectedTruckId: string | null;
 }
 
-export default function Mapper({ currentPos, trucks }: MapperProps) {
-  // console.log(currentLat, currentLon);
+export default function Mapper({
+  currentPos,
+  trucks,
+  selectedTruckId,
+}: MapperProps) {
   return (
     <MapContainer
       className="absolute"
@@ -33,11 +41,24 @@ export default function Mapper({ currentPos, trucks }: MapperProps) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[currentPos.lat, currentPos.lon]} />
+      <Marker position={[currentPos.lat, currentPos.lon]} icon={MapIcon("mobile-device.png")} />
       {trucks.map((truck) => {
-        return <Marker key={truck.id} position={[truck.lat, truck.lon]} />;
+        const truckImage =
+          selectedTruckId === truck.id ? "bullseye.png" : "truck.png";
+        return (
+          <Marker
+            key={truck.id}
+            position={[truck.lat, truck.lon]}
+            icon={MapIcon(truckImage)}
+          >
+            <Popup>
+              {truck.name}
+              <br />
+              {truck.description}
+            </Popup>
+          </Marker>
+        );
       })}
-      <Marker position={[51, 0]} />
     </MapContainer>
   );
 }

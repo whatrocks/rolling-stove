@@ -1,16 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Truck } from "lucide-react";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import LoadingSkeleton from "./components/LoadingSkeleton";
 import Mapper from "./components/Mapper";
+import TruckCard from "./components/TruckCard";
 
-interface FoodTruck {
+export interface FoodTruck {
   dayOfWeek: number;
   startTime: string;
   endTime: string;
@@ -28,8 +22,6 @@ type LocationState = {
   longitude: number;
 };
 
-// const defaultCenter = [37.7636, -122.4174];
-
 function App() {
   const [location, setLocation] = useState<LocationState>({
     latitude: 37.7749,
@@ -37,6 +29,7 @@ function App() {
   });
   const [foodTrucks, setFoodTrucks] = useState<FoodTruck[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectedTruckId, setSelectedTruckId] = useState<string>("");
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -93,40 +86,55 @@ function App() {
       setIsLoading(false);
     }
   };
+
+  const handleTruckClick = (id: string) => {
+    const truck = foodTrucks.find((truck) => truck.id === id);
+    if (truck) {
+      // console.log("truck is ", truck.id)
+      setSelectedTruckId(truck.id);
+    }
+  };
   const truckPositions = foodTrucks.map((truck) => {
-    return { id: truck.id, lat: truck.lat, lon: truck.lon };
+    return {
+      id: truck.id,
+      lat: truck.lat,
+      lon: truck.lon,
+      name: truck.name,
+      description: truck.description,
+    };
   });
   return (
     <>
       <div className="relative h-screen flex flex-col space-y-4 items-center justify-center">
         <Mapper
-          currentPos={{ id: "user", lat: location.latitude, lon: location.longitude }}
+          currentPos={{
+            lat: location.latitude,
+            lon: location.longitude,
+          }}
           trucks={truckPositions}
+          selectedTruckId={selectedTruckId}
         />
         <div style={{ zIndex: 10000 }}>
-          <Button onClick={handleClick}>Find Food Trucks Open Now</Button>
-          {isLoading ? (
-            <div className="flex flex-col align-left space-y-4">
-              <LoadingSkeleton />
-              <LoadingSkeleton />
-              <LoadingSkeleton />
-            </div>
-          ) : (
-            foodTrucks.map((truck) => {
-              return (
-                <Card className="w-[350px] text-left text-sm" key={truck.id}>
-                  <CardHeader>
-                    <div className="flex items-center space-x-4">
-                      <Truck className="h-4 w-4" />
-                      <CardTitle>{truck.name}</CardTitle>
-                    </div>
-                    <CardDescription>{truck.description}</CardDescription>
-                    <p>Distance: {truck.distance.toPrecision(2)}m</p>
-                  </CardHeader>
-                </Card>
-              );
-            })
-          )}
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <Button onClick={handleClick}>Find Food Trucks Open Now</Button>
+            {isLoading ? (
+              <div className="flex flex-col align-left space-y-4">
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+              </div>
+            ) : (
+              foodTrucks.map((truck) => {
+                return (
+                  <TruckCard
+                    key={truck.id}
+                    truck={truck}
+                    onClick={handleTruckClick}
+                  />
+                );
+              })
+            )}
+          </div>
         </div>
       </div>
     </>
