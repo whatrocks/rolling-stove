@@ -51,6 +51,7 @@ function App() {
     }
   }
 
+  // Grab the user's location on app load
   useEffect(() => {
     getLocation()
   }, [])
@@ -84,7 +85,6 @@ function App() {
       setIsLoading(false)
     } catch (error) {
       setError(`Unable to get any trucks right now.`)
-      // TODO: Show error to user on screen
       setIsLoading(false)
     }
   }
