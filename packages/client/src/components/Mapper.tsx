@@ -2,7 +2,6 @@ import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 import MapIcon from "./MapIcon";
-import { FoodTruck } from "@/App";
 
 function ChangeView({ center, zoom }) {
   const map = useMap();
@@ -38,7 +37,7 @@ export default function Mapper({
       scrollWheelZoom={true}
       style={{ width: "100%", height: "100%" }}
     >
-      <ChangeView center={[focusPos.lat - 0.04, focusPos.lon - 0.04]} zoom={13} />
+      <ChangeView center={[focusPos.lat - 0.03, focusPos.lon - 0.03]} zoom={13} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -128,6 +128,10 @@ function App() {
                 return (
                   <TruckCard
                     key={truck.id}
+                    currentPos={{
+                      lat: location.latitude,
+                      lon: location.longitude,
+                    }}
                     truck={truck}
                     onClick={handleTruckClick}
                   />
