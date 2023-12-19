@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import LoadingSkeleton from './components/LoadingSkeleton'
+import AlertMsg from './components/AlertMsg'
 import Mapper from './components/Mapper'
 import TruckCard from './components/TruckCard'
 
@@ -29,6 +30,7 @@ function App() {
   })
   const [foodTrucks, setFoodTrucks] = useState<FoodTruck[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
   const [selectedTruckId, setSelectedTruckId] = useState<string>('')
 
   const getLocation = () => {
@@ -54,9 +56,8 @@ function App() {
   }, [])
 
   const handleClick = async () => {
-    // handle location not there
     if (!location.latitude || !location.longitude) {
-      // show error on screen!
+      setError(`Unable to get your location.`)
       return
     }
     setIsLoading(true)
@@ -72,15 +73,18 @@ function App() {
         lon: location.longitude?.toString() || ''
       })
       const paramsString = newParams.toString()
-      // adjust proxy to get rid of localhost
+      // TODO: Adjust proxy to get rid of localhost
       const response = await fetch(`http://localhost:8080/api/trucks?${paramsString}`)
       const json = await response.json()
       const data: FoodTruck[] = json.data
       setFoodTrucks(data)
+      if (data.length === 0) {
+        setError(`Nothing nearby or open right now! Get moving!`)
+      }
       setIsLoading(false)
     } catch (error) {
-      // show error on screen!
-      console.log('error', error)
+      setError(`Unable to get any trucks right now.`)
+      // TODO: Show error to user on screen
       setIsLoading(false)
     }
   }
@@ -88,7 +92,6 @@ function App() {
   const handleTruckClick = (id: string) => {
     const truck = foodTrucks.find((truck) => truck.id === id)
     if (truck) {
-      // console.log("truck is ", truck.id)
       setSelectedTruckId(truck.id)
     }
   }
@@ -114,6 +117,7 @@ function App() {
         />
         <div style={{ zIndex: 10000 }}>
           <div className="flex flex-col items-center justify-center space-y-4">
+            {error && <AlertMsg error={error} />}
             <Button onClick={handleClick}>Find Food Trucks Open Now</Button>
             {isLoading ? (
               <div className="flex flex-col align-left space-y-4">
