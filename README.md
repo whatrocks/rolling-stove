@@ -52,7 +52,7 @@ npm run test
 Format and lint both packages
 
 ```bash
-npm run format
+npm run fix
 npm run lint
 ```
 
