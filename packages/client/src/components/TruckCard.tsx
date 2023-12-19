@@ -34,7 +34,6 @@ export default function TruckCard({
           <LandPlot className="h-4 w-4" />
           <span>{truck.distance.toPrecision(2)}m</span>
         </div>
-
         <div className="hover:underline">
           <ArrowUpRight className="h-4 w-4" />
           <a

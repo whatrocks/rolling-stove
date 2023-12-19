@@ -24,7 +24,7 @@ function mapJSONtoFoodTruck(json: any): FoodTruck {
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function getAllFoodTrucks(): FoodTruck[] {
-  const data = JSON.parse(readFileSync(path.join(__dirname, 'fixtures.json'), 'utf8'))
+  const data = JSON.parse(readFileSync(path.join(__dirname, 'data.json'), 'utf8'))
   const mappedData: FoodTruck[] = data.map(mapJSONtoFoodTruck)
   return mappedData
 }

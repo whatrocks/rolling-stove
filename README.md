@@ -112,13 +112,54 @@ The apps's current architecture supporting the following user stories:
 * Vite
 * Leaflet
 
-#### Features
-* [ ] 
-* [ ]
+#### Functional Features
+* [x] Zoomable map
+* [x] Big blue centered button to request nearby food trucks
+* [x] Links to Google Maps directions
 
+#### Technical Features
+* [x] Testing with Jest and Supertest
+* [x] Request validation and error-handling
+* [x] Cross-Origin Resource Sharing enabled using cors
+* [x] Secured HTTP Headers using helmet
+
+### Future Features
+
+####  Functional 
+* [ ] Improved searching (e.g. cuisines, future dates)
+* [ ] User registration / management
+* [ ] Value-add features (e.g. ratings, favorites)
+
+#### Technical
+* [ ] Logging (winston)
+* [ ] Environment variables (dotenv)
+* [ ] Compression
+* [ ] Containerization
+* [ ] Add SQL database with geospatial query capabilities
+* [ ] Devise relational data model for trucks, locations, users.
 
 ### Monorepo
 
 * [ ] Shared types between client and server
 * [ ] Git Hooks for linting
 * [ ] CI automation (testing, linting, etc)
+
+https://dev.socrata.com/foundry/data.sfgov.org/jjew-r69b
+
+Skips
+Tradeoffs
+Shortcuts
+
+Production-ready steps
+
+a paragraph or two describing what you think the most important 1-2 features would be to build next if this app was real and was planned for a nation-wide launch with 100k food trucks across 1k cities.
+
+add client tests
+add test for filtering
+
+error handling - nothing found
+validation - 
+
+readability
+
+
