@@ -159,6 +159,10 @@ As we consider future value-add features and user requirements, this would influ
 
 I did not have time to research the Haversine equation as much as I would like, so I elected to use a popular npm package. This would be something we'd want to understand deeply with more time.
 
+### Testing, PRs, etc
+
+There are a number of developer workflows and testing patterns that would be essential to add to improve productivity and maintainability of our app. While testing was introduced to this repo, coverage is still low.
+
 ## Productionization
 
 Given its current read-only, low-volume usage pattern, it would be possible to deploy this toy application to a cloud service with a few essential improvements, including:
