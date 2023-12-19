@@ -49,8 +49,11 @@ export function filterTrucks(trucks: FoodTruck[], params: TruckParams) {
     .map((truck) => {
       const truckLocation = { latitude: truck.lat, longitude: truck.lon }
       const userLocation = { latitude: params.lat, longitude: params.lon }
-      const distance = haversine(userLocation, truckLocation)
+      const distance = haversine(userLocation, truckLocation, { unit: 'mile' })
       return { ...truck, distance }
+    })
+    .filter((truck) => {
+      return truck.distance <= 5 // Needs to be > 5 for my local testing :)
     })
     .sort((a, b) => {
       return a.distance - b.distance
