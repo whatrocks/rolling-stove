@@ -62,6 +62,7 @@ function App() {
       return
     }
     setIsLoading(true)
+    setError('')
     try {
       const now = new Date()
       const newParams = new URLSearchParams({
